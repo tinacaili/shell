@@ -1,0 +1,72 @@
+CSE422 Project 1
+Authors: 
+Tina Li
+Megan Bacani 
+Aaron Graubert
+
+XSH Usage Reference
+
+
+USAGE: xsh [-x] [-d <level>] [-f <file> [args...]]
+
+	-x : Sets XSH to display commands after variables are substituted, but before execution
+	
+	-d <level> : Sets the program debug output level to <level>
+	
+	-f <file> [args...] : Reads in commands from <file> instead of stdin.  Optional args are passed into the file as $1, $2, $3, etc.
+	
+==================================================
+BUILTIN COMMANDS
+==================================================
+	• show W1 W2 … : display the word(s) followed by a newline
+	
+	• set W1 W2: set the value of the local variable W1 to the value W2
+	
+	• unset W1: un set a previously set local variable W1
+	
+	• export W1 W2: export the global variable W1 with the value W2 to the environment
+	
+	• unexport W: unexport the global variable W from the environment
+	
+	• environ: this command should display to the terminal a listing of all environment strings that
+	are currently defined
+	
+	• chdir W: change the current directory 
+	
+	• exit I: exit the shell and return status I. If no value for I is given, the shell should exit with a
+	status code of 0. You should also ensure that any currently running processes are killed off
+	before the shell exits.
+	
+	• wait I: the shell waits for process I (a pid) to complete. If I is -1, the shell waits for any children to
+	complete. Note that you can't wait on grandchildren.
+	
+	• clr: clear the screen and display a new command line prompt at the top
+	
+	• dir: list the contents of the current directory
+	
+	• echo <comment>: display <comment> on the stdout followed by a new line
+	
+	• help: display the user manual using the more filter
+	
+	• pause: pause the operation of the shell until the ‘Enter’ key is pressed
+	
+	• history <n>: Lists the last <n> commands executed.  If n is not specified, the full command history is displayed
+	
+	• repeat <n>: Repeats the <n>th command executed this session.  If n is not specified, the most recent command (excluding the current repeat) is executed
+	
+	• kill [-n] pid: Sends the specified signal (n) to process with id <pid>
+
+==================================================
+INSTRUCTIONS
+==================================================
+The XSH shell is a simple command interpreter.  
+When run, XSH presents the user with a simple prompt "xsh >>"
+Commands entered at the prompt are parsed by xsh, and then executed, if possible.
+The list of commands handled by the program itself are shown above.
+Other external commands are supported, as calls to the system commands.
+Normally, a command is entered, and it gets executed before the next prompt is displayed.
+Alternatively, if a command ends in '&' it will be run in the background.
+After entering such a command, the xsh prompt will be displayed again, while the command is executed in an alternate process
+You can run (theoretically) infinite background jobs, but only one foreground job at a time.
+XSH also supports I/O redirection.  Namely, output of xsh commands can be redirected as input to other commands or programs
+Commands on a single line separated by | characters are piped.  The output of each command is sent as input to the command directly to its right in the line
